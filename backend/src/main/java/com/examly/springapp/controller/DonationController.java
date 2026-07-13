@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import com.examly.springapp.model.Donation;
 import com.examly.springapp.service.DonationService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/campaigns")
 @Validated
+@Tag(name = "Donation Controller", description = "Donation Management APIs")
 public class DonationController {
 
     @Autowired
@@ -23,6 +26,7 @@ public class DonationController {
 
     // Make Donation
     @PostMapping("/{campaignId}/donations")
+    @Operation(summary = "Donate to a campaign")
     public ResponseEntity<Donation> makeDonation(
             @PathVariable Long campaignId,
             @Valid @RequestBody Donation donation) {
@@ -33,6 +37,7 @@ public class DonationController {
     }
 
     // Get Donations for a Campaign
+    @Operation(summary = "Get all donations for a campaign")
     @GetMapping("/{campaignId}/donations")
     public ResponseEntity<List<Donation>> getDonationsForCampaign(
             @PathVariable Long campaignId) {

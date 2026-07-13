@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Schema(description = "Goal Amount", example = "10000")
 public class Donation {
 
     @Id
@@ -30,6 +32,7 @@ public class Donation {
     private Long id;
 
     @DecimalMin(value = "1.00", message = "Amount must be greater than 0")
+    @Schema(description = "Donation Amount", example = "500")
     private BigDecimal amount;
 
     @NotBlank(message = "Donor name is required")

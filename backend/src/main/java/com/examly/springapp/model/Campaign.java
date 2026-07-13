@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +31,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Schema(description = "Campaign Entity")
 public class Campaign {
 
     @Id
@@ -39,6 +41,7 @@ public class Campaign {
     @Column(length = 100, nullable = false)
     @Size(min = 5, max = 100, message = "Title must be between 5 and 100 characters")
     @NotBlank(message = "Title is required")
+    @Schema(description = "Campaign Title", example = "Medical Help")
     private String title;
 
     @Column(length = 500, nullable = false)
@@ -47,6 +50,7 @@ public class Campaign {
     private String description;
 
     @DecimalMin(value = "100.00", message = "Goal amount must be at least 100")
+    @Schema(description = "Goal Amount", example = "10000")
     private BigDecimal goalAmount;
 
     private BigDecimal currentAmount;
