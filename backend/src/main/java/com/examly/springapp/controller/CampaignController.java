@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import com.examly.springapp.model.Campaign;
 import com.examly.springapp.service.CampaignService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/campaigns")
 @Validated
+@Tag(name = "Campaign Controller", description = "Campaign Management APIs")
 public class CampaignController {
 
     @Autowired
@@ -23,6 +26,7 @@ public class CampaignController {
 
     // Create Campaign
     @PostMapping
+    @Operation(summary = "Create a new campaign")
     public ResponseEntity<Campaign> createCampaign(@Valid @RequestBody Campaign campaign) {
 
         Campaign savedCampaign = campaignService.createCampaign(campaign);
@@ -32,6 +36,7 @@ public class CampaignController {
 
     // Get All Campaigns
     @GetMapping
+    @Operation(summary = "Get all campaigns")   
     public ResponseEntity<List<Campaign>> getAllCampaigns(
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String status) {
@@ -43,6 +48,7 @@ public class CampaignController {
 
     // Get Campaign By Id
     @GetMapping("/{id}")
+    @Operation(summary = "Get campaign by ID")
     public ResponseEntity<Campaign> getCampaignById(@PathVariable Long id) {
 
         Campaign campaign = campaignService.getCampaignById(id);
